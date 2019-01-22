@@ -98,14 +98,14 @@ input{
     top: 320;
     left: 800;
     width: 500;
-    display: none;
+    visibility: hidden;
 }
 #df{
     position: absolute;
     top: 320;
     left: 800;
     width: 500;
-    display: none;
+    visibility: hidden;
 }
 #e{
     width: 500;

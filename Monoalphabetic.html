@@ -4,17 +4,17 @@
         <link rel="stylesheet" href="homecss.css">
         <link rel="stylesheet" href="macss.css">
     </head>
-    <body>
+    <body onload="table()">
         <a href="index.html"><h3>Cryptography</h3></a>
         <h2>Monoalphabetic Cipher</h2>
         <table id="tb">
             <tr>
-            <td>Alphabet</td>
-            <%for(int i=65;i<=90;i++){%><td><%=(char)i%></td><%}%>
+                <td>Alphabet</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
-            <td>Value</td>
-            <% for(int i=65;i<=90;i++){%><td><%=(char)i%></td><%}%>
+                <td>Values</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
         </table>
         <div class="k">
@@ -32,12 +32,21 @@
         <label>Plain Text</label><input type="text" id="gpt"><br>
         </div>
         <script>    
-            var s="";
-            for(i=1;i<=26;i++){
-                s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
-            }
+            var arr=document.getElementById("tb");
+            function table(){
+                for(i=65;i<=90;i++){
+                    arr.rows[0].cells[i-64].innerHTML=String.fromCharCode(i);
+                }
+                for(i=65;i<=90;i++){
+                    arr.rows[1].cells[i-64].innerHTML=String.fromCharCode(i);
+                }
+            } 
             function encrypt(){
                 var i=0;
+                var s="";
+                for(i=1;i<=26;i++){
+                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
                 var p=document.getElementById("pt").value.toUpperCase();
                 var x=document.getElementById("tb").rows[1];
                 var g="";
@@ -48,6 +57,10 @@
             }
             function decrypt(){
                 var c="";
+                var s="";
+                for(i=1;i<=26;i++){
+                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
                 for(i=1;i<=26;i++){
                     c=c.concat(document.getElementById("tb").rows[1].cells[i].innerHTML);
                 }
@@ -62,6 +75,10 @@
             }
             function generate(){
                 var i=0;
+                var s="";
+                for(i=1;i<=26;i++){
+                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
                 var k=document.getElementById("k").value.toUpperCase();
                 var gk="";
                 for(i=0;i<k.length;i++){
