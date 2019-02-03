@@ -1,9 +1,35 @@
 <html>
     <head>
         <title>Cryptography</title>
-        <link rel="stylesheet" href="homecss.css">
+        <link rel="stylesheet" href="pfcss.css">
     </head>
-    <body>
-        <h3>Cryptography</h3>
+    <body onload="table()">
+        <a href="index.html"><h3>Cryptography</h3></a>
+        <h2>Playfair</h2>
+        <table id="tb">
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </table>
     </body>
+    <script>
+        var t=document.getElementById("tb");
+        function table(){
+            var i=0,j=0;
+            s=65;
+            for(i=0;i<5;i++){
+                for(j=0;j<5;j++){
+                    if(s==74){
+                        document.getElementById("tb").rows[i].cells[j].innerHTML="I/J";
+                        s++;
+                    }
+                    document.getElementById("tb").rows[i].cells[j].innerHTML=String.fromCharCode(s);
+                    s++;
+                }
+            }
+        }
+    </script>
 </html>
+
