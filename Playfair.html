@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Cryptography</title>
+        <link rel="stylesheet" href="homecss.css">
         <link rel="stylesheet" href="pfcss.css">
     </head>
     <body onload="table()">
@@ -13,6 +14,20 @@
             <tr><td></td><td></td><td></td><td></td><td></td></tr>
             <tr><td></td><td></td><td></td><td></td><td></td></tr>
         </table>
+        <div class="k">
+        <label>Key</label><input type="text" id="k"><br>
+            <button onclick=generate()>Generate Key</button>
+        </div>
+        <div class= "enc">
+        <label>Plain Text</label><input type="text" id="pt"><br>
+        <button onclick=encrypt()>Encrypt</button><br><br>
+        <label>Cipher Text</label><input type="text" id="gct"><br>            
+        </div>
+        <div class="dec">
+        <label>Cipher Text</label><input type="text" id="ct"><br>
+        <button onclick="decrypt()">Decrypt</button><br><br>
+        <label>Plain Text</label><input type="text" id="gpt"><br>
+        </div>
     </body>
     <script>
         var t=document.getElementById("tb");
@@ -22,13 +37,114 @@
             for(i=0;i<5;i++){
                 for(j=0;j<5;j++){
                     if(s==74){
-                        document.getElementById("tb").rows[i].cells[j].innerHTML="I/J";
+                        t.rows[i].cells[j].innerHTML='I/J';
                         s++;
                     }
-                    document.getElementById("tb").rows[i].cells[j].innerHTML=String.fromCharCode(s);
+                    t.rows[i].cells[j].innerHTML=String.fromCharCode(s);
                     s++;
                 }
             }
+        }
+        function generate(){
+            var i=0,j=0,l=0;
+            var s="";
+            for(i=65;i<91;i++){
+                if(i==74)   continue;
+                s=s.concat(String.fromCharCode(i));
+            }
+            var k="";
+            var k1=document.getElementById("k").value.toUpperCase();
+            for(i=0;i<k1.length;i++){
+                if(k1[i]!="J")   k=k.concat(k1[i]);
+            }
+            var gk="";
+            for(i=0;i<k.length;i++){
+                if(!gk.includes(k[i])){
+                    gk=gk.concat(k[i]);
+                }
+            }
+            for(i=0;i<25;i++){
+                if(!gk.includes(s[i])){
+                    gk=gk.concat(s[i]);
+                }
+            }
+            for(i=0;i<5;i++){
+                for(j=0;j<5;j++){
+                    t.rows[i].cells[j].innerHTML=gk[l];
+                    l++;
+                }
+            }
+        }
+        function encrypt(){
+            var i=0,j=0,k=0;
+            var p1=document.getElementById("pt").value.toUpperCase();
+            var p="";
+            var ct="";
+            x=2
+            for(i=0;i<p1.length;i+=2){
+                p=p.concat(p1[i]);
+                if(p1[i]==p1[i+1]){
+                    p=p.concat("X");
+                    i--;
+                }else   p=p.concat(p1[i+1]);
+            }
+            if(p.endsWith("undefined")) p=p.slice(0,-9);
+            if(p.length%2!=0)  p=p.concat("X");       
+            document.getElementById("pt").value=p;
+            var a=[0,0];
+            var b=[0,0];
+            for(k=0;k<p.length;k+=2){
+                for(i=0;i<5;i++){
+                    for(j=0;j<5;j++){
+                        if(t.rows[i].cells[j].innerHTML==p[k]){
+                            a[0]=i;a[1]=j;
+                        }
+                        if(t.rows[i].cells[j].innerHTML==p[k+1]){
+                            b[0]=i;b[1]=j;
+                        }
+                    }
+                }
+                if(a[0]==b[0]){
+                    ct=ct.concat(t.rows[a[0]].cells[(a[1]+1)%5].innerHTML);
+                    ct=ct.concat(t.rows[b[0]].cells[(b[1]+1)%5].innerHTML);
+                }else if(a[1]==b[1]){
+                    ct=ct.concat(t.rows[(a[0]+1)%5].cells[a[1]].innerHTML);
+                    ct=ct.concat(t.rows[(b[0]+1)%5].cells[b[1]].innerHTML);
+                }else{
+                    ct=ct.concat(t.rows[a[0]].cells[b[1]].innerHTML);
+                    ct=ct.concat(t.rows[b[0]].cells[a[1]].innerHTML);
+                }
+            }
+            document.getElementById("gct").value=ct;
+        }
+        function decrypt(){
+            var c=document.getElementById("ct").value.toUpperCase();
+            var pt="";
+            var a=[0,0];
+            var b=[0,0];
+            for(k=0;k<c.length;k+=2){
+                for(i=0;i<5;i++){
+                    for(j=0;j<5;j++){
+                        if(t.rows[i].cells[j].innerHTML==c[k]){
+                            a[0]=i;a[1]=j;
+                        }
+                        if(t.rows[i].cells[j].innerHTML==c[k+1]){
+                            b[0]=i;b[1]=j;
+                        }
+                    }
+                }
+                if(a[0]==b[0]){
+                    pt=pt.concat(t.rows[a[0]].cells[(a[1]-1)%5].innerHTML);
+                    pt=pt.concat(t.rows[b[0]].cells[(b[1]-1)%5].innerHTML);
+                }else if(a[1]==b[1]){
+                    pt=pt.concat(t.rows[(a[0]-1)%5].cells[a[1]].innerHTML);
+                    pt=pt.concat(t.rows[(b[0]-1)%5].cells[b[1]].innerHTML);
+                }else{
+                    pt=pt.concat(t.rows[a[0]].cells[b[1]].innerHTML);
+                    pt=pt.concat(t.rows[b[0]].cells[a[1]].innerHTML);
+                }
+            }
+            document.getElementById("gpt").value=pt;
         }
     </script>
 </html>

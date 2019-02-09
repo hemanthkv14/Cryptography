@@ -91,7 +91,7 @@ input{
     border-color: forestgreen;
     border-style: ridge;
     border-width: thin;
-    
+    text-transform: uppercase;
 }
 #ef{
     position: absolute;
@@ -106,9 +106,6 @@ input{
     left: 800;
     width: 500;
     visibility: hidden;
-}
-#e{
-    width: 500;
 }
 div.p{
     display: inline-block;
