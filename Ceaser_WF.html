@@ -22,17 +22,20 @@
             <button onclick=generate()>Generate Key</button>
         </div>
         <div class= "enc">
-        <label>Plain Text</label><input type="text" id="pt"><br>
+        <label>Plain Text</label><input type="text" id="pt" onkeyup="upperit(this)"><br>
         <button onclick=encrypt()>Encrypt</button><br><br>
         <label>Cipher Text</label><input type="text" id="gct"><br>            
         </div>
         <div class="dec">
-        <label>Cipher Text</label><input type="text" id="ct"><br>
+        <label>Cipher Text</label><input type="text" id="ct" onkeyup="upperit(this)"><br>
         <button onclick="decrypt()">Decrypt</button><br><br>
         <label>Plain Text</label><input type="text" id="gpt"><br>
         </div>
         <script>    
             var arr=document.getElementById("tb");
+            function upperit(arg){
+                document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
+            }
             function table(){
                 for(i=65;i<=90;i++){
                     arr.rows[0].cells[i-64].innerHTML=String.fromCharCode(i);
@@ -47,7 +50,7 @@
             for(i=1;i<=26;i++){
                 s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
             }
-                var p=document.getElementById("pt").value.toUpperCase();
+                var p=document.getElementById("pt").value;
                 var x=document.getElementById("tb").rows[1];
                 var g="";
                 for(i=0;i<p.length;i++){
@@ -61,7 +64,7 @@
                 for(i=1;i<=26;i++){
                     s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
                 }
-                var p=document.getElementById("pt").value.toUpperCase();
+                var p=document.getElementById("pt").value;
                 var x=document.getElementById("tb").rows[0];
                 var g="";
                 for(i=0;i<p.length;i++){

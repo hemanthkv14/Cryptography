@@ -91,7 +91,6 @@ input{
     border-color: forestgreen;
     border-style: ridge;
     border-width: thin;
-    text-transform: uppercase;
 }
 #ef{
     position: absolute;

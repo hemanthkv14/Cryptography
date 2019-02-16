@@ -17,12 +17,12 @@
             </tr>
         </table>
         <form id="enc">
-        <label>Plain Text</label><input type="text" id="pt"><br>
+        <label>Plain Text</label><input type="text" id="pt" onkeyup="upperit(this)"><br>
         <label>Key</label><input type="number" min="1" max="26"><br>
         <button onclick=encrypt()>Encrypt</button><br>
         </form>
         <form id="dec">
-        <label>Cipher Text</label><input type="text" id="ct"><br>
+        <label>Cipher Text</label><input type="text" id="ct" onkeyup="upperit(this)"><br>
         <label>Key</label><input type="number" min="1" max="26"><br>
         <button onclick="decrypt()">Decrypt</button>
         </form>
@@ -42,6 +42,9 @@
         </ul>
         <script>
             var arr=document.getElementById("tb");
+            function upperit(arg){
+                document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
+            }
             function table(){
                 for(i=65;i<=90;i++){
                     arr.rows[0].cells[i-64].innerHTML=String.fromCharCode(i);
