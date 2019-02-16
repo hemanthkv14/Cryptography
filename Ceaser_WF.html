@@ -37,6 +37,7 @@
         </div>
         <script>    
             var arr=document.getElementById("tb");
+            var key=0;
             function upperit(arg){
                 document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
             }
@@ -55,6 +56,7 @@
                     window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
                 }
                 var k=document.getElementById("k").value % 26;
+                key=k;
                 document.getElementById("k").value=k
                 var u=window.value.slice(k-1);
                 var d=window.value.slice(0,k);
@@ -100,59 +102,65 @@
             }
             function encrypt(){
                 var i=0;
-                var j=0;
-                var g="";
                 var time=1000;
                 var tup=document.getElementById("tb").rows[1];
                 var p=document.getElementById("pt").value;
+                document.getElementById("gct").value="";
                 var a=[];
                 for(i=0;i<p.length;i++){
                     a.push(window.value.indexOf(p.charAt(i)));
                 }
                 a=a.reverse();
-                var func=setInterval(enc,1000);
+                var fune=setInterval(enc,1000);
                 function enc(){
-                    var x=a.pop();
-                    arr.rows[0].cells[x+1].style.backgroundColor="#595959";
-                    setTimeout(function(){
-                        tup.cells[x+1].style.backgroundColor="#bcbcbc";
-                    },500);
-                    document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
+                    try{
+                        var x=a.pop();
+                        arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                        },500);
+                        document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
+                        setTimeout(function(){
                         arr.rows[0].cells[x+1].style.backgroundColor="#333";
-                        tup.cells[x+1].style.backgroundColor="#333";
+                            setTimeout(function(){
+                                tup.cells[x+1].style.backgroundColor="#333";
+                            },800);
+                        },200);
+                    }catch(e){
+                        clearInterval(fune);
+                    }
                 }
-                
-                
-                /*
-                var g="";
-                for(i=0;i<p.length;i++){
-                    g=g.concat(x.cells[window.value.indexOf(p[i])+1].innerHTML);                    
-                }
-                document.getElementById("gct").value=g;*/
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             function decrypt(){
                 var i=0;
-                var p=document.getElementById("pt").value;
-                var x=document.getElementById("tb").rows[0];
-                var g="";
-                for(i=0;i<p.length;i++){
-                    g=g.concat(x.cells[window.value.indexOf(p[i])+1].innerHTML);                    
+                var time=1000;
+                var tup=document.getElementById("tb").rows[1];
+                var c=document.getElementById("ct").value;
+                document.getElementById("gpt").value="";
+                var a=[];
+                for(i=0;i<c.length;i++){
+                    a.push(window.value.indexOf(c.charAt(i)));
                 }
-                document.getElementById("gpt").value=g;
+                a=a.reverse();
+                var fund=setInterval(dec,1000);
+                function dec(){
+                    try{
+                        var x=a.pop();
+                        tup.cells[(x+1-key)%26].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            arr.rows[0].cells[(x+1-key)%26].style.backgroundColor="#bcbcbc";
+                        },500);
+                        document.getElementById("gpt").value+=arr.rows[0].cells[(x+1-key)%26].innerHTML;
+                        setTimeout(function(){
+                        tup.cells[(x+1-key)%26].style.backgroundColor="#333";
+                            setTimeout(function(){
+                                arr.rows[0].cells[(x+1-key)%26].style.backgroundColor="#333";
+                            },800);
+                        },200);
+                    }catch(e){
+                        clearInterval(fund);
+                    }
+                }
             }
         </script>
     </body>
