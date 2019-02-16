@@ -16,6 +16,10 @@
                 <td>Values</td>
                 <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
+            <tr class="invi">
+                <td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
         </table>
         <div class="k">
         <label>Key</label><input type="number" min="1" max="26" id="k"><br>
@@ -44,45 +48,111 @@
                     arr.rows[1].cells[i-64].innerHTML=String.fromCharCode(i);
                 }
             }  
+            function generate(){
+                var i=0,j=0;
+                window.value="";
+                for(i=1;i<=26;i++){
+                    window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
+                var k=document.getElementById("k").value % 26;
+                document.getElementById("k").value=k
+                var u=window.value.slice(k-1);
+                var d=window.value.slice(0,k);
+                var tup=document.getElementById("tb").rows[1];
+                var tdu=document.getElementById("tb").rows[2];
+                setTimeout(function(){
+                    for(i=1;i<=d.length;i++){
+                        tdu.cells[i].innerHTML=d[i-1];
+                    }
+                    for(i=1;i<=d.length;i++){
+                        tup.cells[i].innerHTML="";
+                    }
+                },1000);
+                setTimeout(function(){
+                    for(i=1;i<=d.length;i++){
+                        tdu.cells[i].innerHTML="";
+                    }
+                    for(i=1;i<=26-(26-d.length);i++){
+                        tdu.cells[i+26-k].innerHTML=d[i-1];
+                    }
+                },2000);
+                setTimeout(function(){
+                    for(i=1;i<27-d.length;i++){
+                        tup.cells[i].innerHTML=u[i];
+                    }
+                    for(i=1;i<=d.length;i++){
+                        tup.cells[i+26-k].innerHTML="";
+                    }
+                },3000);
+                setTimeout(function(){
+                    for(i=1;i<=d.length;i++){
+                        tup.cells[i+26-k].innerHTML=d[i-1];
+                    }
+                    for(i=1;i<=d.length;i++){
+                        tdu.cells[i+26-k].innerHTML="";
+                    }
+                },4000);
+                
+                /*var gs=window.value.slice(k-1).concat(window.value.slice(0,k));
+                for(i=1;i<=26;i++){
+                    document.getElementById("tb").rows[1].cells[i].innerHTML=gs[i];
+                }*/
+            }
             function encrypt(){
                 var i=0;
-            var s="";
-            for(i=1;i<=26;i++){
-                s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
-            }
+                var j=0;
+                var g="";
+                var time=1000;
+                var tup=document.getElementById("tb").rows[1];
                 var p=document.getElementById("pt").value;
-                var x=document.getElementById("tb").rows[1];
+                var a=[];
+                for(i=0;i<p.length;i++){
+                    a.push(window.value.indexOf(p.charAt(i)));
+                }
+                a=a.reverse();
+                var func=setInterval(enc,1000);
+                function enc(){
+                    var x=a.pop();
+                    arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                    setTimeout(function(){
+                        tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                    },500);
+                    document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
+                        arr.rows[0].cells[x+1].style.backgroundColor="#333";
+                        tup.cells[x+1].style.backgroundColor="#333";
+                }
+                
+                
+                /*
                 var g="";
                 for(i=0;i<p.length;i++){
-                    g=g.concat(x.cells[s.indexOf(p[i])+1].innerHTML);                    
+                    g=g.concat(x.cells[window.value.indexOf(p[i])+1].innerHTML);                    
                 }
-                document.getElementById("gct").value=g;
+                document.getElementById("gct").value=g;*/
             }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             function decrypt(){
                 var i=0;
-                var s="";
-                for(i=1;i<=26;i++){
-                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
-                }
                 var p=document.getElementById("pt").value;
                 var x=document.getElementById("tb").rows[0];
                 var g="";
                 for(i=0;i<p.length;i++){
-                    g=g.concat(x.cells[s.indexOf(p[i])+1].innerHTML);                    
+                    g=g.concat(x.cells[window.value.indexOf(p[i])+1].innerHTML);                    
                 }
                 document.getElementById("gpt").value=g;
-            }
-            function generate(){
-                var i=0;
-                var s="";
-                for(i=1;i<=26;i++){
-                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
-                }
-                var k=document.getElementById("k").value % 26;
-                var gs=s.slice(k-1).concat(s.slice(0,k));
-                for(i=1;i<=26;i++){
-                    document.getElementById("tb").rows[1].cells[i].innerHTML=gs[i];
-                }
             }
         </script>
     </body>

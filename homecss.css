@@ -45,8 +45,7 @@ a{
     text-decoration: none;
 }
 table{
-    padding: 20;
-    border: 1px solid whitesmoke;
+    padding: 25;
     border-collapse: collapse;
 }
 td{

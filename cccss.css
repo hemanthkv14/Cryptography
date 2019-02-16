@@ -1,17 +1,20 @@
 div.k{
     padding: 20;
     position: absolute;
+    top: 400;
     left: 20;
 }
 div.enc{
     padding: 20;
     position: absolute;
-    left: 250;
+    top: 400;
+    left: 320;
 }
 div.dec{
     padding: 20;
     position:absolute;
-    left: 600;
+    top: 400;
+    left: 740;
 }
 label{
     display: inline-block;
@@ -36,4 +39,10 @@ input{
     border-style: ridge;
     border-width: thin;
     
+}
+tr.invi td{
+    border: 0;
+}
+td{
+    width: 75;
 }
