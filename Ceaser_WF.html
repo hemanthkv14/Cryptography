@@ -94,15 +94,9 @@
                         tdu.cells[i+26-k].innerHTML="";
                     }
                 },4000);
-                
-                /*var gs=window.value.slice(k-1).concat(window.value.slice(0,k));
-                for(i=1;i<=26;i++){
-                    document.getElementById("tb").rows[1].cells[i].innerHTML=gs[i];
-                }*/
             }
             function encrypt(){
                 var i=0;
-                var time=1000;
                 var tup=document.getElementById("tb").rows[1];
                 var p=document.getElementById("pt").value;
                 document.getElementById("gct").value="";
@@ -121,7 +115,7 @@
                         },500);
                         document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
                         setTimeout(function(){
-                        arr.rows[0].cells[x+1].style.backgroundColor="#333";
+                            arr.rows[0].cells[x+1].style.backgroundColor="#333";
                             setTimeout(function(){
                                 tup.cells[x+1].style.backgroundColor="#333";
                             },800);
@@ -133,32 +127,31 @@
             }
             function decrypt(){
                 var i=0;
-                var time=1000;
                 var tup=document.getElementById("tb").rows[1];
                 var c=document.getElementById("ct").value;
                 document.getElementById("gpt").value="";
                 var a=[];
                 for(i=0;i<c.length;i++){
-                    a.push(window.value.indexOf(c.charAt(i)));
+                    a.push((window.value.indexOf(c.charAt(i))-key)%26);
                 }
                 a=a.reverse();
-                var fund=setInterval(dec,1000);
+                 var fund=setInterval(dec,1000);
                 function dec(){
                     try{
                         var x=a.pop();
-                        tup.cells[(x+1-key)%26].style.backgroundColor="#595959";
+                        tup.cells[x+1].style.backgroundColor="#595959";
                         setTimeout(function(){
-                            arr.rows[0].cells[(x+1-key)%26].style.backgroundColor="#bcbcbc";
+                            arr.rows[0].cells[x+1].style.backgroundColor="#bcbcbc";
                         },500);
-                        document.getElementById("gpt").value+=arr.rows[0].cells[(x+1-key)%26].innerHTML;
+                        document.getElementById("gpt").value+=arr.rows[0].cells[x+1].innerHTML;
                         setTimeout(function(){
-                        tup.cells[(x+1-key)%26].style.backgroundColor="#333";
+                            tup.cells[x+1].style.backgroundColor="#333";
                             setTimeout(function(){
-                                arr.rows[0].cells[(x+1-key)%26].style.backgroundColor="#333";
+                                arr.rows[0].cells[x+1].style.backgroundColor="#333";
                             },800);
                         },200);
                     }catch(e){
-                        clearInterval(fund);
+                        clearInterval(fune);
                     }
                 }
             }
