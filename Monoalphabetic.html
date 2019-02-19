@@ -16,6 +16,10 @@
                 <td>Values</td>
                 <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
+            <tr class="invi">
+                <td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
         </table>
         <div class="k">
         <label>Key</label><input type="text" id="k" onkeyup="upperit(this)"><br>
@@ -36,6 +40,7 @@
             function upperit(arg){
                 document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
             }
+            var key="";
             function table(){
                 for(i=65;i<=90;i++){
                     arr.rows[0].cells[i-64].innerHTML=String.fromCharCode(i);
@@ -43,45 +48,14 @@
                 for(i=65;i<=90;i++){
                     arr.rows[1].cells[i-64].innerHTML=String.fromCharCode(i);
                 }
-            } 
-            function encrypt(){
-                var i=0;
-                var s="";
-                for(i=1;i<=26;i++){
-                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
-                }
-                var p=document.getElementById("pt").value;
-                var x=document.getElementById("tb").rows[1];
-                var g="";
-                for(i=0;i<p.length;i++){
-                    g=g.concat(x.cells[s.indexOf(p[i])+1].innerHTML);                    
-                }
-                document.getElementById("gct").value=g;
-            }
-            function decrypt(){
-                var c="";
-                var s="";
-                for(i=1;i<=26;i++){
-                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
-                }
-                for(i=1;i<=26;i++){
-                    c=c.concat(document.getElementById("tb").rows[1].cells[i].innerHTML);
-                }
-                var i=0;
-                var p=document.getElementById("ct").value;
-                var x=document.getElementById("tb").rows[0];
-                var g="";
-                for(i=0;i<p.length;i++){
-                    g=g.concat(x.cells[c.indexOf(p[i])+1].innerHTML);                    
-                }
-                document.getElementById("gpt").value=g;
             }
             function generate(){
                 var i=0;
-                var s="";
+                window.value="";
                 for(i=1;i<=26;i++){
-                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                    window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
                 }
+                var s=window.value.toString();
                 var k=document.getElementById("k").value;
                 var gk="";
                 for(i=0;i<k.length;i++){
@@ -89,13 +63,125 @@
                         gk=gk.concat(k[i]);
                     }
                 }
-                for(i=1;i<s.length;i++){
+                key=gk.length;
+                document.getElementById("k").value=gk;
+                var rm=""
+                for(i=0;i<s.length;i++){
                     if(gk.includes(s[i])==false){
-                        gk=gk.concat(s[i]);
+                        rm=rm.concat(s[i]);
                     }
                 }
-                for(i=1;i<26;i++){
-                    arr.rows[1].cells[i].innerHTML=gk[i-1];
+                var tup=document.getElementById("tb").rows[1];
+                var tdn=document.getElementById("tb").rows[2];
+                setTimeout(function(){
+                    for(i=1;i<27;i++){
+                        if(gk.includes(tup.cells[i].innerHTML.toString())==true){
+                            tup.cells[i].style.backgroundColor="#595959";
+                        }
+                    }
+                },1000);
+                setTimeout(function(){
+                    for(i=1;i<27;i++){
+                        if(gk.includes(tup.cells[i].innerHTML.toString())==true){
+                            tdn.cells[i].innerHTML=tup.cells[i].innerHTML;
+                            tup.cells[i].innerHTML="";
+                        }
+                    }
+                },2500);
+                setTimeout(function(){    
+                    for(i=1;i<27;i++){
+                        if(gk.includes(tup.cells[i].innerHTML.toString())==true){
+                            tup.cells[i].style.backgroundColor="#333";
+                            tdn.cells[i].innerHTML="";
+                        }
+                    }                
+                    for(i=1;i<=gk.length;i++){
+                        tdn.cells[i].innerHTML=gk[i-1];
+                    }
+                },4000);
+                setTimeout(function(){
+                    for(i=1;i<=rm.length;i++){
+                        tup.cells[i+gk.length].innerHTML=rm[i-1];
+                    }
+                    for(i=1;i<=gk.length;i++){
+                        tup.cells[i].innerHTML="";
+                    }
+                },5500);
+                setTimeout(function(){
+                    for(i=1;i<=gk.length;i++){
+                        tup.cells[i].innerHTML=gk[i-1];
+                    }
+                    for(i=1;i<=gk.length;i++){
+                        tdn.cells[i].innerHTML="";
+                    }
+                },7000);
+            } 
+            function encrypt(){
+                var i=0;
+                var time=1000;
+                var tup=document.getElementById("tb").rows[1];
+                var p=document.getElementById("pt").value;
+                document.getElementById("gct").value="";
+                var a=[];
+                for(i=0;i<p.length;i++){
+                    a.push(window.value.indexOf(p.charAt(i)));
+                }
+                a=a.reverse();
+                var fune=setInterval(enc,1000);
+                function enc(){
+                    try{
+                        var x=a.pop();
+                        arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                        },500);
+                        document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
+                        setTimeout(function(){
+                        arr.rows[0].cells[x+1].style.backgroundColor="#333";
+                            setTimeout(function(){
+                                tup.cells[x+1].style.backgroundColor="#333";
+                            },800);
+                        },200);
+                    }catch(e){
+                        clearInterval(fune);
+                    }
+                }
+            }
+            function decrypt(){
+                var i=0;
+                var tup=document.getElementById("tb").rows[1];
+                var c=document.getElementById("ct").value;
+                document.getElementById("gpt").value="";
+                var a=[];
+                for(i=0;i<c.length;i++){
+                    for(j=1;j<27;j++){
+                        if(tup.cells[j].innerHTML==c[i]){
+                            a.push(j);
+                        }
+                    }
+                }
+                a=a.reverse();
+                for(i=0;i<a.length;i++){
+                    a[i]=(a[i]+26)%26;
+                }
+                var fund=setInterval(dec,1000);
+                function dec(){
+                    try{
+                        var x=a.pop();
+                        tup.cells[x].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            arr.rows[0].cells[x].style.backgroundColor="#bcbcbc";
+                        },500);
+                        document.getElementById("gpt").value+=arr.rows[0].cells[x].innerHTML;
+                        setTimeout(function(){
+                            tup.cells[x].style.backgroundColor="#333";
+                            setTimeout(function(){
+                                arr.rows[0].cells[x].style.backgroundColor="#333";
+                            },800);
+                        },200);
+                    }catch(e){
+                        clearInterval(fund);
+                    }
                 }
             }
         </script>
