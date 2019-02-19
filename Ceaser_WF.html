@@ -37,7 +37,6 @@
         </div>
         <script>    
             var arr=document.getElementById("tb");
-            var key=0;
             function upperit(arg){
                 document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
             }
@@ -132,10 +131,13 @@
                 document.getElementById("gpt").value="";
                 var a=[];
                 for(i=0;i<c.length;i++){
-                    a.push((window.value.indexOf(c.charAt(i))-key)%26);
+                    a.push(window.value.indexOf(c.charAt(i)));
                 }
                 a=a.reverse();
-                 var fund=setInterval(dec,1000);
+                for(i=0;i<a.length;i++){
+                    a[i]=(a[i]-key+26)%26;
+                }
+                var fund=setInterval(dec,1000);
                 function dec(){
                     try{
                         var x=a.pop();
@@ -151,7 +153,7 @@
                             },800);
                         },200);
                     }catch(e){
-                        clearInterval(fune);
+                        clearInterval(fund);
                     }
                 }
             }
