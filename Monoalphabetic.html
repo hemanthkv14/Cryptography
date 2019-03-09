@@ -135,13 +135,13 @@
                         setTimeout(function(){
                             tup.cells[x+1].style.backgroundColor="#bcbcbc";
                         },500);
-                        document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
                         setTimeout(function(){
                         arr.rows[0].cells[x+1].style.backgroundColor="#333";
-                            setTimeout(function(){
-                                tup.cells[x+1].style.backgroundColor="#333";
-                            },800);
                         },200);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#333";
+                            document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
+                        },800);
                     }catch(e){
                         clearInterval(fune);
                     }
@@ -172,13 +172,13 @@
                         setTimeout(function(){
                             arr.rows[0].cells[x].style.backgroundColor="#bcbcbc";
                         },500);
-                        document.getElementById("gpt").value+=arr.rows[0].cells[x].innerHTML;
                         setTimeout(function(){
                             tup.cells[x].style.backgroundColor="#333";
-                            setTimeout(function(){
-                                arr.rows[0].cells[x].style.backgroundColor="#333";
-                            },800);
                         },200);
+                        setTimeout(function(){
+                            arr.rows[0].cells[x].style.backgroundColor="#333";
+                            document.getElementById("gpt").value+=arr.rows[0].cells[x].innerHTML;
+                        },800);
                     }catch(e){
                         clearInterval(fund);
                     }

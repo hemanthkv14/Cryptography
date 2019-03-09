@@ -16,32 +16,24 @@
                 <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
         </table>
-        <form id="enc">
+        <div id="enc">
         <label>Plain Text</label><input type="text" id="pt" onkeyup="upperit(this)"><br>
-        <label>Key</label><input type="number" min="1" max="26"><br>
+        <label>Key</label><input type="number" id="k" min="1" max="26"><br>
         <button onclick=encrypt()>Encrypt</button><br>
-        </form>
-        <form id="dec">
+        </div>
+        <div id="dec">
         <label>Cipher Text</label><input type="text" id="ct" onkeyup="upperit(this)"><br>
-        <label>Key</label><input type="number" min="1" max="26"><br>
+        <label>Key</label><input type="number" id="k1" min="1" max="26"><br>
         <button onclick="decrypt()">Decrypt</button>
-        </form>
-        <ul type=none id="ef">
-            <li id="e">Encrypt</li><br>
-            <li id="e">C = ( P + K ) mod 26</li><br>
-            <li id="e">C = ( <input id="ed" type="number"> + <input id="ed" type="number"> ) % 26 </li><br>
-            <li id="e">Value = <input id="ed" type="number"></li><br>
-            <li id="e">Ciphertext = <input type="text"></li>
-        </ul>
-        <ul type=none id="df">
-            <li id="e">Decrypt</li><br>
-            <li id="e">P = ( C - K ) mod 26</li><br>
-            <li id="e">P = ( <input id="ed" type="number"> + <input id="ed" type="number"> ) % 26</li><br>
-            <li id="e">Value = <input id="ed" type="number"></li><br>
-            <li id="e">Plaintext = <input type="text"></li>
-        </ul>
+        </div>
+        <div id="ef">
+        </div>
+        <div id="df">
+        </div>
         <script>
             var arr=document.getElementById("tb");
+            var tup=document.getElementById("tb").rows[1];
+            window.value="";
             function upperit(arg){
                 document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
             }
@@ -54,12 +46,111 @@
                 }
             }  
             function encrypt(){
-                setInterval(function(){
-                document.getElementById('ef').style.visibility="visible";
-                },1000);
+                for(i=1;i<=26;i++){
+                    window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
+                document.getElementById('df').innerHTML="";
+                document.getElementById('ef').innerHTML="<ul type='none'><li class='e'>Encrypt</li><br><li class='e'>C = ( P + K ) mod 26</li><br><li class='e'>C = ( <input class='ed' id='val' type='number'> + <input class='ed' id='key' type='number'> ) % 26</li><br><li class='e'>Values = <input id='ans' type='number'></li><br><li class='e'>Ciphertext = <input type='text' id='sol'></li></ul>";
+                document.getElementById("key").value=document.getElementById("k").value;
+                var i=0;
+                var p=document.getElementById("pt").value;
+                var a=[];
+                for(i=0;i<p.length;i++){
+                    a.push(window.value.indexOf(p.charAt(i)));
+                }
+                a=a.reverse();
+                var fune=setInterval(enc,4500);
+                function enc(){
+                    try{
+                        var x=a.pop();
+                        arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            arr.rows[0].cells[x+1].style.backgroundColor="#333"
+                        },200);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                        },500);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#333";
+                        },800);
+                        setTimeout(function(){
+                            document.getElementById("val").value=tup.cells[x+1].innerHTML;
+                        },1500);
+                        setTimeout(function(){
+                            document.getElementById("ans").value=               (parseInt(document.getElementById("val").value)+parseInt(document.getElementById("k").value))%26;
+                        },2100);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#595959";
+                        },2700);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                        },3000);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#bcbcbc";
+                        },3500);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                            document.getElementById("sol").value+=arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].innerHTML;
+                        },4000);
+                    }catch(e){
+                        clearInterval(fune);
+                    }
+                }
             }
             function decrypt(){
-                document.getElementById('ef').style.visibility="visible";
+                for(i=1;i<=26;i++){
+                    window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
+                document.getElementById('ef').innerHTML="";
+                document.getElementById('df').innerHTML="<ul type='none'><li class='e'>Decrypt</li><br><li class='e'>P = ( C - K ) mod 26</li><br><li class='e'>P = ( <input class='ed' id='val' type='number'> - <input class='ed' id='key' type='number'> ) % 26</li><br><li class='e'>Values = <input id='ans' type='number'></li><br><li class='e'>Plaintext = <input type='text' id='sol'></li></ul>";
+                document.getElementById("key").value=document.getElementById("k1").value;
+                var i=0;
+                var p=document.getElementById("ct").value;
+                var a=[];
+                for(i=0;i<p.length;i++){
+                    a.push(window.value.indexOf(p.charAt(i)));
+                }
+                a=a.reverse();
+                var fune=setInterval(enc,4500);
+                function enc(){
+                    try{
+                        var x=a.pop();
+                        arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            arr.rows[0].cells[x+1].style.backgroundColor="#333"
+                        },200);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                        },500);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#333";
+                        },800);
+                        setTimeout(function(){
+                            document.getElementById("val").value=tup.cells[x+1].innerHTML;
+                        },1500);
+                        setTimeout(function(){
+                            var d=parseInt(document.getElementById("val").value)-parseInt(document.getElementById("k1").value);
+                            d=parseInt(d);
+                            if(d<0) d+=26;
+                            document.getElementById("ans").value=d;
+                        },2100);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#595959";
+                        },2700);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                        },3000);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#bcbcbc";
+                        },3500);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                            document.getElementById("sol").value+=arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].innerHTML;
+                        },4000);
+                    }catch(e){
+                        clearInterval(fune);
+                    }
+                }
             }
         </script>
     </body>

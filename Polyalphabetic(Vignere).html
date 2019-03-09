@@ -134,37 +134,115 @@
             function upperit(arg){
                 document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
             }
-            function encrypt(){
-                var i=0;
-                var s="";
-                for(i=1;i<=26;i++){
-                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+            function colorit(){
+                for(var i=0;i<27;i++){
+                    for(var j=0;j<27;j++){
+                        t.rows[i].cells[j].style.backgroundColor="#333";
+                    }
                 }
+            }
+            function encrypt(){
                 var k=document.getElementById("ke").value;
                 var p=document.getElementById("pt").value;
+                var i=0,i1=0,j=-1;
                 k=generate(p,k)
                 document.getElementById("ke").value=k;
-                document.getElementById("pt").value=p;
-                var l="";
-                var t=document.getElementById("tb");
+                /*
+                for(i=1;i<=26;i++){
+                    s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
                 for(i=0;i<p.length;i++){
                     l=l.concat(t.rows[s.indexOf(k[i])+1].cells[s.indexOf(p[i])+1].innerHTML);
+                }*/
+                var y=setInterval(function(){
+                colorit();
+                if(j==p.length-1){
+                    clearInterval(y);
+                }else{                    
+                var z=setInterval(function(){
+                    t.rows[0].cells[i].style.backgroundColor="#595959";
+                    if(t.rows[0].cells[i].innerHTML==p.charAt(j)){
+                        t.rows[0].cells[i].style.backgroundColor="#bcbcbc";
+                        clearInterval(z);
+                        var z1=setInterval(function(){
+                            t.rows[i1].cells[0].style.backgroundColor="#595959";
+                            if(t.rows[i1].cells[0].innerHTML==k.charAt(j)){
+                                t.rows[i1].cells[0].style.backgroundColor="#bcbcbc";
+                                clearInterval(z1);
+                                mark(i,i1);
+                            }
+                            i1++;
+                        },150);
+                    }
+                    i++;
+                },150); 
+                j++;
+                i=1;
+                i1=1;
+            }
+            },8000);
+            }
+            function mark(i,i1){
+                for(var l=1;l<i1;l++){
+                    t.rows[l].cells[i-1].style.backgroundColor="#595959";
                 }
-                document.getElementById("gct").value=l;
+                for(var l=1;l<i;l++){
+                    t.rows[i1].cells[l].style.backgroundColor="#595959";
+                }
+                t.rows[i1].cells[i-1].style.backgroundColor="#bcbcbc";
+                document.getElementById("gct").value+=t.rows[i1].cells[i-1].innerHTML;
+            }
+            function mark1(i,i1){
+                for(var l=1;l<i;l++){
+                    t.rows[l].cells[i1].style.backgroundColor="#595959";
+                }
+                for(var l=1;l<i1;l++){
+                    t.rows[0].cells[l].style.backgroundColor="#595959";
+                }
+                t.rows[0].cells[l].style.backgroundColor="#bcbcbc";
+                document.getElementById("gpt").value+=t.rows[0].cells[l].innerHTML;
             }
             function decrypt(){
-                var i=0,j=0,m=0;
+                var i=0,i1=0,j=-1;
                 var s="";
                 for(i=1;i<=26;i++){
                     s=s.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
                 }
-                var k=document.getElementById("kd").value;
                 var c=document.getElementById("ct").value;
+                var k=document.getElementById("kd").value;
                 k=generate(c,k);
                 document.getElementById("kd").value=k;
-                document.getElementById("ct").value=c;
-                var t=document.getElementById("tb");
-                var l="";
+                var y=setInterval(function(){
+                colorit();
+                if(j==c.length-1){
+                    clearInterval(y);
+                }else{  
+                    var z=setInterval(function(){
+                        t.rows[i].cells[0].style.backgroundColor="#595959";
+                        if(t.rows[i].cells[0].innerHTML==k.charAt(j)){
+                            t.rows[i].cells[0].style.backgroundColor="#bcbcbc";
+                            clearInterval(z);
+                            var z1=setInterval(function(){
+                                t.rows[i-1].cells[i1].style.backgroundColor="#595959";
+                                if(t.rows[i-1].cells[i1].innerHTML==c.charAt(j)){
+                                    t.rows[i-1].cells[i1].style.backgroundColor="#bcbcbc";
+                                    clearInterval(z1);
+                                    mark1(i,i1);
+                                }
+                                i1++;
+                            },150);
+                        }
+                        i++;
+                    },150);
+                    j++;
+                    i=1;
+                    i1=1;
+                }
+                },8000);
+            }
+                
+                
+                /*var l="";
                 for(i=0;i<c.length;i++){
                     lp:
                     for(j=1;j<27;j++){
@@ -178,8 +256,7 @@
                         }
                     }
                 }
-                document.getElementById("gpt").value=l;
-            }              
+                document.getElementById("gpt").value=l;*/         
             function generate(p,k){
                 while(k.length<p.length){
                     k=k.concat(k);

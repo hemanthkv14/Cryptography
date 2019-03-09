@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 table{
     border: 1px solid whitesmoke;
     border-collapse: collapse;
@@ -21,121 +20,27 @@ div.k{
     padding: 20;
     position: absolute;
     left: 250;
-    top: 250;
+    top: 300;
 }
 div.enc{
     padding: 20;
     position: absolute;
     left: 600;
-    top: 250;
+    top: 300;
 }
 div.dec{
     padding: 20;
     position:absolute;
     left: 950;
-    top: 250;
-=======
-body{
-    background-color:#333;
+    top: 300;
 }
-h3{
-    color:whitesmoke;
-    text-align:left;
-    font-family:'Roboto Condensed';
-    font-weight: 50;
-    font-size: 30;
-    border-bottom-style: ridge;
-    border-bottom-width: thin;
-    border-bottom-color: forestgreen;
-    padding-left: 20;
-    padding-top: 20;
-    padding-bottom: 20;    
-    width: 200;
-}
-h3:hover{
-    cursor: pointer;
-}
-h2{
-    color:whitesmoke;
-    text-align:left;
-    font-family:sans-serif;
-    font-weight: 50;
-    font-size: 25;
-    padding-left: 20;
-    padding-top: 20;
-    padding-bottom: 15;    
-    width: 200;
-}
-ul{
-    font-size: 20;
-    font-family: sans-serif;
-    color:burlywood;
-    padding: 30;
-    color:white;
-}
-li{
-    padding-bottom: 5;
-    color: aquamarine;
-}
-a{
-    color: antiquewhite;
-    text-decoration: none;
-}
-table{
-    border: 1px solid whitesmoke;
-    border-collapse: collapse;
-}
-td{
-    text-align: left;
-    color:forestgreen;
-    font-size: 25;
-    border: 1px solid whitesmoke;
-    padding: 15;
-}
-label{
-    display: inline-block;
-    color: bisque;
-    padding: 20;
-    font-size: 20;
-    width: 100;
-}
-form{
-    width: 500;
-}
-button{
+#tb{
     position: absolute;
-    padding: 10;
-    left: 40;
-    width: 100;
-    background-color: #333;
-    border-style: ridge;
-    color: aliceblue;
-    border-color:forestgreen;
+    top: 300;
 }
-input{
-    padding: 3;
-    border-color: forestgreen;
-    border-style: ridge;
-    border-width: thin;
-    
+tr.invi td, #tb1{
+    border: 0;
 }
-div.p{
-    display: inline-block;
-    color: white;
-    padding: 20;
-    font-size: 20;
-    width: 100;
-}
-div.enc{
-    padding: 20;
-    position: absolute;
-    left: 600;
-    top: 250;
-}
-div.dec{
-    padding: 20;
-    position:absolute;
-    left: 950;
-    top: 250;
->>>>>>> e4fc27f21be189a4342dd5d2894571feb82dc220
+tr.w td{
+    height: 500;
 }
