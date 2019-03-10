@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <title>Cryptography</title>
+        <link rel="stylesheet" href="homecss.css">
+    </head>
+    <body onload="table()">
+        <a href="index.html"><h3>Cryptography</h3></a>
+        <h2>Vignere Cipher with Formula</h2>
+        <table id="tb">
+            <tr>
+                <td>Alphabet</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Values</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+        </table>
+        <div id="enc">
+        <label>Plain Text</label><input type="text" id="pt" onkeyup="upperit(this)"><br>
+        <label>Key</label><input type="text" id="ke" onkeyup="upperit(this)"><br>
+        <button onclick=encrypt()>Encrypt</button><br>
+        </div>
+        <div id="dec">
+        <label>Cipher Text</label><input type="text" id="ct" onkeyup="upperit(this)"><br>
+        <label>Key</label><input type="text" id="kd" onkeyup="upperit(this)"><br>
+        <button onclick="decrypt()">Decrypt</button>
+        </div>
+        <div id="ef">
+        </div>
+        <div id="df">
+        </div>
+        <script>
+            var arr=document.getElementById("tb");
+            var tup=document.getElementById("tb").rows[1];
+            window.value="";
+            function upperit(arg){
+                document.getElementById(arg.getAttribute('id')).value = document.getElementById(arg.getAttribute('id')).value.toUpperCase();
+            }
+            function table(){
+                for(i=65;i<=90;i++){
+                    arr.rows[0].cells[i-64].innerHTML=String.fromCharCode(i);
+                }
+                for(i=1;i<=26;i++){
+                    arr.rows[1].cells[i].innerHTML=i-1;
+                }
+            }  
+            function encrypt(){
+                for(i=1;i<=26;i++){
+                    window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
+                document.getElementById('df').innerHTML="";
+                document.getElementById('ef').innerHTML="<ul type='none'><li class='e'>Encrypt</li><br><li class='e'>C = ( P[ i ] + K[ i ] ) mod 26 <br> where  i = 0 to N ( length of Plaintext )</li><br><li class='e'>C = ( <input class='ed' id='val' type='number'> + <input class='ed' id='key' type='number'> ) % 26</li><br><li class='e'>Values = <input id='ans' type='number'></li><br><li class='e'>Ciphertext = <input type='text' id='sol'></li></ul>";
+                var i=0;
+                var p=document.getElementById("pt").value;
+                var k=document.getElementById("ke").value;
+                k=generate(p,k);
+                document.getElementById("ke").value=k;
+                var a=[];
+                var b=[];
+                for(i=0;i<p.length;i++){
+                    a.push(window.value.indexOf(p.charAt(i)));
+                }
+                for(i=0;i<k.length;i++){
+                    b.push(window.value.indexOf(k.charAt(i)));
+                }
+                a=a.reverse();
+                b=b.reverse();
+                var fune=setInterval(enc,4500);
+                function enc(){
+                    try{
+                        var x=a.pop();
+                        var x1=b.pop();
+                        arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                        arr.rows[0].cells[x1+1].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            arr.rows[0].cells[x+1].style.backgroundColor="#333"
+                            arr.rows[0].cells[x1+1].style.backgroundColor="#333"
+                        },200);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                            tup.cells[x1+1].style.backgroundColor="#bcbcbc";
+                        },500);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#333";
+                            tup.cells[x1+1].style.backgroundColor="#333";
+                        },800);
+                        setTimeout(function(){
+                            document.getElementById("val").value=tup.cells[x+1].innerHTML;
+                            document.getElementById("key").value=tup.cells[x1+1].innerHTML;
+                        },1500);
+                        setTimeout(function(){
+                            document.getElementById("ans").value=               (parseInt(document.getElementById("val").value)+parseInt(document.getElementById("key").value))%26;
+                        },2100);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#595959";
+                        },2700);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                        },3000);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#bcbcbc";
+                        },3500);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                            document.getElementById("sol").value+=arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].innerHTML;
+                        },4000);
+                    }catch(e){
+                        clearInterval(fune);
+                    }
+                }
+            }     
+            function generate(p,k){
+                while(k.length<p.length){
+                    k=k.concat(k);
+                }
+                k=k.slice(0,p.length);
+                return k;
+            }
+            function decrypt(){
+                for(i=1;i<=26;i++){
+                    window.value=window.value.concat(document.getElementById("tb").rows[0].cells[i].innerHTML);
+                }
+                document.getElementById('ef').innerHTML="";
+                document.getElementById('df').innerHTML="<ul type='none'><li class='e'>Decrypt</li><br><li class='e'>P = ( C[ i ] - K[ i ] ) mod 26<br>where i = 0 to N ( length of Ciphertext )</li><br><li class='e'>P = ( <input class='ed' id='val' type='number'> - <input class='ed' id='key' type='number'> ) % 26</li><br><li class='e'>Values = <input id='ans' type='number'></li><br><li class='e'>Plaintext = <input type='text' id='sol'></li></ul>";
+                var i=0;
+                var p=document.getElementById("ct").value;
+                var k=document.getElementById("kd").value;
+                var a=[];
+                var b=[];
+                k=generate(p,k);
+                document.getElementById("kd").value=k;
+                for(i=0;i<p.length;i++){
+                    a.push(window.value.indexOf(p.charAt(i)));
+                }
+                for(i=0;i<k.length;i++){
+                    b.push(window.value.indexOf(k.charAt(i)));
+                }
+                a=a.reverse();
+                b=b.reverse();
+                var fune=setInterval(enc,4500);
+                function enc(){
+                    try{
+                        var x=a.pop();
+                        var x1=b.pop();
+                        arr.rows[0].cells[x+1].style.backgroundColor="#595959";
+                        arr.rows[0].cells[x1+1].style.backgroundColor="#595959";
+                        setTimeout(function(){
+                            arr.rows[0].cells[x+1].style.backgroundColor="#333"
+                            arr.rows[0].cells[x1+1].style.backgroundColor="#333"
+                        },200);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                            tup.cells[x1+1].style.backgroundColor="#bcbcbc";
+                        },500);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#333";
+                            tup.cells[x1+1].style.backgroundColor="#333";
+                        },800);
+                        setTimeout(function(){
+                            document.getElementById("val").value=tup.cells[x+1].innerHTML;
+                            document.getElementById("key").value=tup.cells[x1+1].innerHTML;
+                        },1500);
+                        setTimeout(function(){
+                            var d=parseInt(document.getElementById("val").value)-parseInt(document.getElementById("key").value);
+                            d=parseInt(d);
+                            if(d<0) d+=26;
+                            document.getElementById("ans").value=d;
+                        },2100);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#595959";
+                        },2700);
+                        setTimeout(function(){
+                            tup.cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                        },3000);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#bcbcbc";
+                        },3500);
+                        setTimeout(function(){
+                            arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].style.backgroundColor="#333";
+                            document.getElementById("sol").value+=arr.rows[0].cells[parseInt(document.getElementById("ans").value)+1].innerHTML;
+                        },4000);
+                    }catch(e){
+                        clearInterval(fune);
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
