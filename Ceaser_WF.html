@@ -110,11 +110,11 @@
                         var x=a.pop();
                         arr.rows[0].cells[x+1].style.backgroundColor="#595959";
                         setTimeout(function(){
-                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
-                        },500);
-                        setTimeout(function(){
                             arr.rows[0].cells[x+1].style.backgroundColor="#333";
                         },200);
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#bcbcbc";
+                        },500);
                         setTimeout(function(){
                             tup.cells[x+1].style.backgroundColor="#333";
                             document.getElementById("gct").value+=tup.cells[x+1].innerHTML;
@@ -141,13 +141,13 @@
                 function dec(){
                     try{
                         var x=a.pop();
+                        setTimeout(function(){
+                            tup.cells[x+1].style.backgroundColor="#333";
+                        },200);
                         tup.cells[x+1].style.backgroundColor="#595959";
                         setTimeout(function(){
                             arr.rows[0].cells[x+1].style.backgroundColor="#bcbcbc";
                         },500);
-                        setTimeout(function(){
-                            tup.cells[x+1].style.backgroundColor="#333";
-                        },200);
                         setTimeout(function(){
                             arr.rows[0].cells[x+1].style.backgroundColor="#333";
                             document.getElementById("gpt").value+=arr.rows[0].cells[x+1].innerHTML;
