@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Cryptography</title>
+        <link rel="stylesheet" href="homecss.css">
+        <link rel="stylesheet" href="pkccss.css">
+    </head>
+    <body>
+        <a href="index.html"><h3>Cryptography</h3></a>
+        <h2>Public Key Cryptography</h2>
+        <h2>Public Key Cryptosystem with Confidentiality</h2><button onclick="explainc()">Explain</button><br><br><br>
+        <label id='sndc'>Bob</label><label id='rcvc'>Alice</label><br><br><br>
+        <div id="block">
+        <br><br>
+        <label id='c'>Bob's collection of Public Keys</label><label id='cr'>Alice's Private Key</label><br>
+        <label id='s'>James</label><label id='s'>Alice</label><label id='s'>Joy</label><label id='s'>Sam</label><br>
+        <label id='d'>&darr;<sub style="font-size:25">PU<sub>Alice</sub></sub></label><label id='dr'>&darr;<sub style="font-size:25">PR<sub>Alice</sub></sub></label><br>
+        <label id='l'>Plain<br>Text</label>
+        <label id='ar'>&rarr;</label>
+        <label id='ed'>Encryption<br>Algorithm</label>
+        <label id='arr'>&rarr;</label>
+        <label id='ed'>Decryption<br>Algorithm</label>
+        <label id='ar'>&rarr;</label>
+        <label id='l'>Plain<br>Text</label><br>
+        <label id='f'>X</label><label id='f1'>Y=E ( PU<sub>Alice</sub> , X )</label><label id='f2'>X = ( PR<sub>Alice</sub> , Y )</label>
+        </div>
+        <h2>Public Key Cryptosystem with Authentication</h2><br>
+        <label id='snda'>Bob</label><label id='rcva'>Alice</label><br><br><br>
+        <div id="block">
+        <br><br>
+        <label id='cra'>Bob's Private Key</label><label id='ca'>Alice's collection of Public Keys</label><br>
+        <label id='sa'>James</label><label id='sa'>Bob</label><label id='sa'>Joy</label><label id='sa'>Sam</label><br>
+        <label id='d'>&darr;<sub style="font-size:25">PR<sub>Bob</sub></sub></label><label id='dr'>&darr;<sub style="font-size:25">PU<sub>Bob</sub></sub></label><br>
+        <label id='l'>Plain<br>Text</label>
+        <label id='ar'>&rarr;</label>
+        <label id='ed'>Encryption<br>Algorithm</label>
+        <label id='arr'>&rarr;</label>
+        <label id='ed'>Decryption<br>Algorithm</label>
+        <label id='ar'>&rarr;</label>
+        <label id='l'>Plain<br>Text</label><br>
+        <label id='f'>X</label><label id='f1'>Y=E ( PR<sub>Bob</sub> , X )</label><label id='f2'>X = ( PU<sub>Bob</sub> , Y )</label>
+        </div>
+        <div id='pc'>
+            <p>Hemanth Kumar</p><br>
+            <p>Harini Shree</p>
+        </div>
+        <script>
+            function explainc(){
+                setTimeout(function(){
+                    document.getElementById("sndc").style.backgroundColor="#595959";
+                    document.getElementById("rcvc").style.backgroundColor="#595959";
+                },200);
+                setTimeout(function(){
+                    document.getElementById("sndc").style.backgroundColor="#333";
+                    document.getElementById("rcvc").style.backgroundColor="#333";
+                },800);
+                
+            }
+        </script>
+    </body>
+</html>
+        
+
+
+        <select>
+            <option value="" selected disabled hidden>FROM</option>
+            <option>Hemanth</option>
+            <option>Sudheer</option>
+            <option>Karthik</option>
+            <option>Tarun</option>
+        </select>
+        <select>
+            <option value="" selected disabled hidden>TO</option>
+            <option id='o'>Hemanth</option>
+            <option>Sudheer</option>
+            <option>Karthik</option>
+            <option>Tarun</option>
+        </select>
+        <select>
+            <option value="" selected disabled hidden>PROVIDE</option>
+            <option>Confidentiality</option>
+            <option>Authentication</option>
+            <option>Confidentiality & Authentication</option>
+        </select><br><br>

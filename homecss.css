@@ -27,7 +27,7 @@ h2{
     padding-left: 20;
     padding-top: 20;
     padding-bottom: 15;    
-    width: 200;
+    width: 500;
 }
 ul{
     font-size: 20;
@@ -48,7 +48,7 @@ table{
     padding: 25;
     border-collapse: collapse;
 }
-td{
+td,th{
     text-align: left;
     color:red;
     font-size: 25;

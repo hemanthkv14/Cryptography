@@ -1,6 +1,8 @@
 table{
     border: 1px solid whitesmoke;
     border-collapse: collapse;
+    position: absolute;
+    left: 50;
 }
 td{
     text-align: left;
@@ -19,24 +21,28 @@ div.p{
 div.k{
     padding: 20;
     position: absolute;
-    left: 250;
+    left: 300;
     top: 300;
 }
 div.enc{
     padding: 20;
     position: absolute;
-    left: 600;
+    left: 650;
     top: 300;
 }
 div.dec{
     padding: 20;
     position:absolute;
-    left: 950;
+    left: 1000;
     top: 300;
 }
 #tb{
     position: absolute;
     top: 300;
+}
+#tb1{
+    position: absolute;
+    top: 200;    
 }
 tr.invi td, #tb1{
     border: 0;
