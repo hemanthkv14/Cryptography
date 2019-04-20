@@ -12,72 +12,183 @@
         <div id="block">
         <br><br>
         <label id='c'>Bob's collection of Public Keys</label><label id='cr'>Alice's Private Key</label><br>
-        <label id='s'>James</label><label id='s'>Alice</label><label id='s'>Joy</label><label id='s'>Sam</label><br>
+        <label id='s'>James</label><label id='st'>Alice</label><label id='s'>Joy</label><label id='s'>Sam</label><br>
         <label id='d'>&darr;<sub style="font-size:25">PU<sub>Alice</sub></sub></label><label id='dr'>&darr;<sub style="font-size:25">PR<sub>Alice</sub></sub></label><br>
         <label id='l'>Plain<br>Text</label>
         <label id='ar'>&rarr;</label>
         <label id='ed'>Encryption<br>Algorithm</label>
         <label id='arr'>&rarr;</label>
-        <label id='ed'>Decryption<br>Algorithm</label>
+        <label id='edd'>Decryption<br>Algorithm</label>
         <label id='ar'>&rarr;</label>
-        <label id='l'>Plain<br>Text</label><br>
-        <label id='f'>X</label><label id='f1'>Y=E ( PU<sub>Alice</sub> , X )</label><label id='f2'>X = ( PR<sub>Alice</sub> , Y )</label>
-        </div>
-        <h2>Public Key Cryptosystem with Authentication</h2><br>
+        <label id='l1'>Plain<br>Text</label><br>
+        <label id='f0'>X</label><label id='f1'>Y=E ( PU<sub>Alice</sub> , X )</label><label id='f2'>X = ( PR<sub>Alice</sub> , Y )</label>
+        </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h2>Public Key Cryptosystem with Authentication</h2><button onclick="explaina()">Explain</button><br><br><br>
         <label id='snda'>Bob</label><label id='rcva'>Alice</label><br><br><br>
         <div id="block">
         <br><br>
         <label id='cra'>Bob's Private Key</label><label id='ca'>Alice's collection of Public Keys</label><br>
-        <label id='sa'>James</label><label id='sa'>Bob</label><label id='sa'>Joy</label><label id='sa'>Sam</label><br>
-        <label id='d'>&darr;<sub style="font-size:25">PR<sub>Bob</sub></sub></label><label id='dr'>&darr;<sub style="font-size:25">PU<sub>Bob</sub></sub></label><br>
-        <label id='l'>Plain<br>Text</label>
-        <label id='ar'>&rarr;</label>
-        <label id='ed'>Encryption<br>Algorithm</label>
-        <label id='arr'>&rarr;</label>
-        <label id='ed'>Decryption<br>Algorithm</label>
-        <label id='ar'>&rarr;</label>
-        <label id='l'>Plain<br>Text</label><br>
-        <label id='f'>X</label><label id='f1'>Y=E ( PR<sub>Bob</sub> , X )</label><label id='f2'>X = ( PU<sub>Bob</sub> , Y )</label>
+        <label id='sa'>James</label><label id='sta'>Bob</label><label id='sa'>Joy</label><label id='sa'>Sam</label><br>
+        <label id='da'>&darr;<sub style="font-size:25">PR<sub>Bob</sub></sub></label><label id='dra'>&darr;<sub style="font-size:25">PU<sub>Bob</sub></sub></label><br>
+        <label id='la'>Plain<br>Text</label>
+        <label id='ara'>&rarr;</label>
+        <label id='eda'>Encryption<br>Algorithm</label>
+        <label id='arra'>&rarr;</label>
+        <label id='edda'>Decryption<br>Algorithm</label>
+        <label id='ara'>&rarr;</label>
+        <label id='l1a'>Plain<br>Text</label><br>
+        <label id='f0'>X</label><label id='f1a'>Y=E ( PR<sub>Bob</sub> , X )</label><label id='f2a'>X = ( PU<sub>Bob</sub> , Y )</label>
+        </div>
+        <div id='det'>
+            <p id="t"><span style="color:coral; font-size: 20;">Plain Text : </span>Data which is in readable format and to be encrypted, Denoted by <b> X </b></p>
+            <p id="t"><span style="color:coral; font-size: 20;">Cipher Text : </span>Data which is in unreadable format and to be decrypted, Denoted by <b>Y = E ( K , X ) </b></p>
+            <p id="t"><span style="color:coral; font-size: 20;">Encryption Algorithm : </span>The algorithm used to Encrypt data, take in the Plain Text and Key as input produce Cipher Text as output</p>
+            <p id="t"><span style="color:coral; font-size: 20;">Decryption Algorithm : </span>The algorithm used to Decrypt data, take in the Cipher Text and Key as input produce Plain Text as output</p>
+            <p><span style="color:coral; font-size: 20;">PU<sub>X</sub> : </span>Public key of person X.</p>
+            <p><span style="color:coral; font-size: 20;">PR<sub>X</sub> : </span>Private key of person X.</p>
         </div>
         <div id='pc'>
-            <p>Hemanth Kumar</p><br>
-            <p>Harini Shree</p>
+        </div>
+        <div id='pa'>
         </div>
         <script>
             function explainc(){
                 setTimeout(function(){
                     document.getElementById("sndc").style.backgroundColor="#595959";
-                    document.getElementById("rcvc").style.backgroundColor="#595959";
-                },200);
+                    document.getElementById("pc").innerHTML="<p><span>Sender : Bob</span></p>";
+                },1000);
                 setTimeout(function(){
-                    document.getElementById("sndc").style.backgroundColor="#333";
-                    document.getElementById("rcvc").style.backgroundColor="#333";
-                },800);
-                
+                    document.getElementById("rcvc").style.backgroundColor="#595959";
+                    document.getElementById("pc").innerHTML="<p><span>Sender : Bob &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver : Alice</span></p>";
+                },3000);
+                setTimeout(function(){
+                    var s="<p>Both <span>Sender</span> and <span>Receiver</span> has a pair of Keys. <br><span>Public </span>: Which is public to all. <br> <span>Private </span>: Which is private to only the specific user.</p>";
+                    document.getElementById("pc").innerHTML+=s;
+                },5000);
+                setTimeout(function(){
+                    document.getElementById("c").style.backgroundColor="#595959";
+                },10000);
+                setTimeout(function(){
+                    var s="<p>Bob has a collection of all Public keys of other users and selects one user's public key to whom he wants to send data.<br><span>Alice's </span> Public Key.</p>";
+                    document.getElementById("pc").innerHTML+=s;
+                },15000);
+                setTimeout(function(){
+                    document.getElementById("st").style.fontSize="25";
+                    document.getElementById("st").style.color="black";
+                },20000);
+                setTimeout(function(){
+                    document.getElementById("l").style.backgroundColor="#595959";
+                },23000);
+                setTimeout(function(){
+                    var s="<p>Bob selects the <span>Plain Text</span> that is to be <span>Encrypted </span>.</p>";
+                    document.getElementById("pc").innerHTML+=s;
+                },25000);
+                setTimeout(function(){
+                    document.getElementById("d").style.border="1px dashed coral";
+                    document.getElementById("l").style.backgroundColor="#595959";
+                    document.getElementById("ed").style.backgroundColor="#595959";
+                },27000);
+                setTimeout(function(){
+                    var s="<p>Bob <span>Encryptes </span>the <span>Plain Text</span> using <span>Alice's Public Key</span>.</p>";
+                    document.getElementById("pc").innerHTML+=s;
+                },29000);
+                setTimeout(function(){
+                    var s="<p>Alice receives the <span>Cipher Text</span>.</p>";
+                    document.getElementById("pc").innerHTML+=s;
+                },33000);
+                setTimeout(function(){
+                   document.getElementById("cr").style.background="#595959"; 
+                },36000);
+                setTimeout(function(){
+                    var s="<p>Alice uses her <span>Private Key</span> to decrypt the data.</p>"
+                    document.getElementById("pc").innerHTML+=s;
+                },38000);
+                setTimeout(function(){
+                    document.getElementById("edd").style.background="#595959";
+                    document.getElementById("dr").style.border="1px dashed coral";
+                },40000);
+                setTimeout(function(){
+                    var s="<p>Alice Decryptes the <span>Cipher Text</span> and generates the <span>Plain Text</span>.</p>";
+                    document.getElementById("pc").innerHTML+=s;
+                },42000);
+                setTimeout(function(){
+                    document.getElementById("l1").style.background="#595959";
+                },44000);
+                setTimeout(function(){
+                    var s="<p>The <span>Plain Text</span> is <span>Encrypted </span> using <span>Alice's Public Key</span> and this Encypted Text can only be converted into <span>Plain Text</span> using <span>Alice's Private Key</span>, and nobody else can encrypt it.<br>This ensures the <span>Confidentiality</span> of data.</p>"
+                    document.getElementById("pc").innerHTML+=s;
+                },46000);
+            }
+            
+            
+            
+            function explaina(){
+                setTimeout(function(){
+                    document.getElementById("snda").style.backgroundColor="#595959";
+                    document.getElementById("pa").innerHTML="<p><span>Sender : Bob</span></p>";
+                },1000);
+                setTimeout(function(){
+                    document.getElementById("rcva").style.backgroundColor="#595959";
+                    document.getElementById("pa").innerHTML="<p><span>Sender : Bob &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver : Alice</span></p>";
+                },3000);
+                setTimeout(function(){
+                    var s="<p>Both <span>Sender</span> and <span>Receiver</span> has a pair of Keys. <br><span>Public </span>: Which is public to all. <br> <span>Private </span>: Which is private to only the specific user.</p>";
+                    document.getElementById("pa").innerHTML+=s;
+                },5000);
+                setTimeout(function(){
+                    document.getElementById("cra").style.backgroundColor="#595959";
+                },10000);
+                setTimeout(function(){
+                    var s="<p><span>Bob</span> uses his <span>Private Key</span> to Encrypt the data.</p>";
+                    document.getElementById("pa").innerHTML+=s;
+                },15000);
+                setTimeout(function(){
+                    document.getElementById("la").style.backgroundColor="#595959";
+                },20000);
+                setTimeout(function(){
+                    var s="<p>Bob selects the <span>Plain Text</span> that is to be <span>Encrypted</span>.</p>";
+                    document.getElementById("pa").innerHTML+=s;
+                },23000);
+                setTimeout(function(){
+                    document.getElementById("da").style.border="1px dashed coral";
+                    document.getElementById("la").style.backgroundColor="#595959";
+                    document.getElementById("eda").style.backgroundColor="#595959";
+                },25000);
+                setTimeout(function(){
+                    var s="<p>Bob <span>Encryptes </span>the <span>Plain Text</span> using <span>his Private Key</span>.</p>";
+                    document.getElementById("pa").innerHTML+=s;
+                },27000);
+                setTimeout(function(){
+                    var s="<p>Alice has a collection of all Public keys of other users and selects the user's public key from whom the data is received.<br><span>Bob's </span> Public Key.</p>";
+                    document.getElementById("pa").innerHTML+=s;
+                },29000);
+                setTimeout(function(){
+                   document.getElementById("ca").style.background="#595959"; 
+                },33000);
+                setTimeout(function(){
+                    document.getElementById("sta").style.fontSize="25";
+                    document.getElementById("sta").style.color="black";
+                },36000);
+                setTimeout(function(){
+                    var s="<p>Alice uses <span>Bob's Public Key</span> to decrypt the data.</p>"
+                    document.getElementById("pa").innerHTML+=s;
+                },38000);
+                setTimeout(function(){
+                    document.getElementById("edda").style.background="#595959";
+                    document.getElementById("dra").style.border="1px dashed coral";
+                },40000);
+                setTimeout(function(){
+                    var s="<p>Alice Decryptes the <span>Cipher Text</span> and generates the <span>Plain Text</span>.</p>";
+                    document.getElementById("pa").innerHTML+=s;
+                },42000);
+                setTimeout(function(){
+                    document.getElementById("l1a").style.background="#595959";
+                },44000);
+                setTimeout(function(){
+                    var s="<p>The <span>Plain Text</span> is <span>Encrypted </span> using <span>Bob's Private Key</span> and this Encypted Text can only be converted into <span>Plain Text</span> using <span>Bob's Public Key</span>.<br>This ensures the data is sent from <span>Authenticated</span> Sender.</p>"
+                    document.getElementById("pa").innerHTML+=s;
+                },46000);
             }
         </script>
     </body>
 </html>
-        
-
-
-        <select>
-            <option value="" selected disabled hidden>FROM</option>
-            <option>Hemanth</option>
-            <option>Sudheer</option>
-            <option>Karthik</option>
-            <option>Tarun</option>
-        </select>
-        <select>
-            <option value="" selected disabled hidden>TO</option>
-            <option id='o'>Hemanth</option>
-            <option>Sudheer</option>
-            <option>Karthik</option>
-            <option>Tarun</option>
-        </select>
-        <select>
-            <option value="" selected disabled hidden>PROVIDE</option>
-            <option>Confidentiality</option>
-            <option>Authentication</option>
-            <option>Confidentiality & Authentication</option>
-        </select><br><br>

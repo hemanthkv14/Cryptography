@@ -3,7 +3,7 @@
     border-radius: 15px;
     width: 800;
 }
-#l{
+#l,#la,#l1,#l1a{
     position: relative;
     border: 2px solid green;
     padding: 15;
@@ -11,7 +11,7 @@
     left: 10;
     width: 50;
 }
-#ed{
+#ed,#eda,#edd,#edda{
     border: 4px solid green;
     padding: 15;
     text-align: center;
@@ -28,12 +28,12 @@
 #rcvc,#rcva{
     left: 300;
 }
-#ar{
+#ar,#ara{
     font-size: 50;
     text-align: center;
     width: 50;
 }
-#arr{
+#arr,#arra{
     font-size: 75;
     text-align: center;
     width: 75;
@@ -54,11 +54,17 @@
     width: 120;
     left: 100;    
 }
-#s{
+#s,#st,#sa,#sta{
     position: relative;
     border: 2px green;
     width: 30;
     left: 10;
+}
+#sta{
+    position: relative;
+    border: 2px green;
+    width: 30;
+    left: 350;
 }
 #ca{
     left: 150;
@@ -83,31 +89,69 @@ label #l{
     width: 120;
     height: 50;
 }
-#d{
+label #la{
+    position: relative;
+    top: 400;
+    width: 120;
+    height: 50;
+}
+label #l1{
+    position: relative;
+    top: 400;
+    width: 120;
+    height: 50;
+}
+label #l1a{
+    position: relative;
+    top: 400;
+    width: 120;
+    height: 50;
+}
+#d,#da{
     font-size: 50;
     position: relative;
     left: 175;
 }
-#dr{
+#dr,#dra{
     font-size: 50;
     position: relative;
     left: 300;
 }
-#f,#f1,#f2{
+#f,#f0,#f1,#f2,#fa,#f1a,#f2a{
     position: relative;
     left: 100;
     top: -25;
 }
-#f1{
+#f1,#f1a{
     left: 150;
     width: 200;
 }
-#f2{
+#f2,#f2a{
     left: 175;
     width: 200;
 }
-#pc{
-    
+#pc,#pa{
+    position:absolute;
+    left: 850;
+    top: 435;
+    width: 450;
+    height: 750;
+    color: coral;
+    padding: 10;
+    font-family:monospace;
+    font-size: 15;
+}
+#pa{
+    top: 1475;
+}
+#det{
+    position:absolute;
+    left: 850;
+    top: 50;
+    width: 450;
+    height: 350;
+    color: whitesmoke;
+    padding: 10;
 }
 select{
     padding: 10;
@@ -116,4 +160,13 @@ select{
     border-style: ridge;
     color: aliceblue;
     border-color:forestgreen;
+}
+#t{
+    color: whitesmoke;
+    font-size: 15;
+    font-family:monospace;
+}
+span{
+    color:coral;
+    font-size: 20;
 }
